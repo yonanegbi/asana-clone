@@ -3,20 +3,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups'; 
 import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './page';
-import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
- 
+import { Navbar, Footer, Sidebar, ThemeSettings } from './components'; 
 import './App.css'; 
-// import SideBar from './components/SideBar';
+import { appStore } from './contexts/store';  
  
 
-// import { useStateContext } from './contexts/ContextProvider';
-
-const App = () => {
-  // const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
-  const [activeMenu, setActiveMenu] = useState(false)
-  const [currentMode, setCurrentMode] = useState('none')
-  const [themeSettings, setThemeSettings] = useState(false)
-  const [currentColor, setCurrentColor] = useState('blue')
+const App = () => {  
+  const {setCurrentColor,setCurrentMode,currentMode, activeMenu,currentColor,themeSettings, setThemeSettings } = appStore();
 
   // useEffect(() => {
   //   const currentThemeColor = localStorage.getItem('colorMode');
@@ -25,7 +18,7 @@ const App = () => {
   //     setCurrentColor(currentThemeColor);
   //     setCurrentMode(currentThemeMode);
   //   }
-  // }, []);
+  // }, []);  
 
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
@@ -38,7 +31,7 @@ const App = () => {
             >
               <button
                 type="button"
-                onClick={() => setThemeSettings(() =>!themeSettings)}
+                onClick={() => setThemeSettings(!themeSettings)}
                 style={{ background: currentColor, borderRadius: '50%' }}
                 className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
               >
